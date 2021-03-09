@@ -21,6 +21,12 @@ struct ContentView: View {
     
     var viewMode = SingletonVM.sharedInstance.globalViewModel
     
+    
+    func startGame(diameter: CGFloat) {
+        
+        viewMode.addInitToGameBoard(gRow: GuessRow(circleDiameter: diameter, colors: [convIntToColor(conv: viewMode.getCircleArray()[0][0].color), convIntToColor(conv: viewMode.getCircleArray()[0][1].color), convIntToColor(conv: viewMode.getCircleArray()[0][2].color), convIntToColor(conv: viewMode.getCircleArray()[0][3].color)], id: viewMode.getAndIncreaseGuessRowID(), viewModel: viewMode))
+    }
+    
     func body(_ geometry: GeometryProxy, viewModel: MasterMindViewModel) -> some View{
         //palette colors to choose from
         let colorsPallette:[Color] = [.blue, .yellow, .purple, .red, .green]
@@ -32,7 +38,7 @@ struct ContentView: View {
         
         let largeCircleDiameter = guessAreaWidth / CGFloat(numberOfGuessCircles + 2) // one for the feedback and one for spaces in between
         
-
+        startGame(diameter: largeCircleDiameter)
         
         return HStack(alignment: .bottom) {
             PaletteArea(colors: colorsPallette, circleDiameter: largeCircleDiameter, viewModel: viewModel)
@@ -40,19 +46,19 @@ struct ContentView: View {
                     .position(CGPoint(x: paletteAreaWidth / 4, y: geometry.size.height / 2.0))
                 
                 VStack {
-                    
-
-                    GuessArea(diameter: largeCircleDiameter, viewMode: viewModel)
-                           
+         
 
                     GuessRow(circleDiameter: largeCircleDiameter, colors: [.white, .white, .white, .white], id: viewModel.getCurrCircleArrayNumber(), viewModel: viewModel)
-                        .frame(width: guessAreaWidth, height: 70, alignment: .bottom)
+                        .frame(width: guessAreaWidth, height: 50, alignment: .bottom)
+                    
                     Text("Submit Guess")
+                        
                         .fontWeight(.bold)
                         .padding()
                         .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .top, endPoint: .bottom))
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                        .frame(alignment:.bottom)
                         .onTapGesture {
                             if(viewModel.tooManyRows() == 11){
                                 print("LOSER!")
@@ -63,7 +69,6 @@ struct ContentView: View {
                             print(viewModel.getSelectedColor())
                             if(viewModel.checkIfFirstRow()){
                                 viewModel.setInitialRowToColors()
-//                                viewModel.addInitToGameBoard(gRow: GuessRow(circleDiameter: largeCircleDiameter, colors: [convIntToColor(conv: viewModel.getCircleArray()[0][0].color), convIntToColor(conv: viewModel.getCircleArray()[0][1].color), convIntToColor(conv: viewModel.getCircleArray()[0][2].color), convIntToColor(conv: viewModel.getCircleArray()[0][3].color)], id: viewModel.getAndIncreaseGuessRowID(), viewModel: viewModel))
                                 
                             }
                             else{
@@ -81,10 +86,10 @@ struct ContentView: View {
                             print(viewModel.getGameBoard())
                         }
     
-                    Rectangle() // rectangles can serve as spacers.
-                        .frame(width: guessAreaWidth, height: largeCircleDiameter, alignment: .bottom)
-                        .opacity(0.0)
-                        .padding()
+//                    Rectangle() // rectangles can serve as spacers.
+//                        .frame(width: guessAreaWidth, height: largeCircleDiameter, alignment: .bottom)
+//                        .opacity(0.0)
+//                        .padding()
 
     
             }
@@ -105,49 +110,6 @@ struct ContentView_Previews: PreviewProvider {
 
 
 
-// --------------------------------------------------
-// GUESS AREA
-struct GuessArea: View {
-    let circleDiameter: CGFloat
-    var guessLevels = [GuessRow]()
-    @ObservedObject var viewModel:MasterMindViewModel
-    
-//    @ObservedObject var viewModel = MasterMindViewModel()
-    init(diameter: CGFloat, viewMode: MasterMindViewModel) {
-         viewModel = viewMode
-        
-        circleDiameter = diameter
-        
-//        viewModel.getGameBoard().append(GuessRow(circleDiameter: diameter, colors: [convIntToColor(conv: viewModel.getCircleArray()[0][0].color), convIntToColor(conv: viewModel.getCircleArray()[0][1].color), convIntToColor(conv: viewModel.getCircleArray()[0][2].color), convIntToColor(conv: viewModel.getCircleArray()[0][3].color)], id: viewModel.getAndIncreaseGuessRowID()))
-//
-        viewModel.addInitToGameBoard(gRow: GuessRow(circleDiameter: diameter, colors: [convIntToColor(conv: viewModel.getCircleArray()[0][0].color), convIntToColor(conv: viewModel.getCircleArray()[0][1].color), convIntToColor(conv: viewModel.getCircleArray()[0][2].color), convIntToColor(conv: viewModel.getCircleArray()[0][3].color)], id: viewModel.getAndIncreaseGuessRowID(), viewModel: viewModel))
-    }
-    
-    
-    var body: some View {
-        VStack {
-            Spacer()
-
-            ForEach(viewModel.getGameBoard()) { row in
-                VStack {
-                    
-                    
-                }
-            }
-        }
-    }
-    
-    func guessViewFor(level: Int) -> some View {
-//        print("guessViewFor level \(level), size: \(size) ")
-        return  guessLevels[level]
-    }
-    
-    func fourBlankCircles() -> [Color] {
-        return [Color.blue, Color.blue, Color.blue, Color.blue]
-    }
-}
-
-
 
 
 struct GuessRow: View, Identifiable {
@@ -155,6 +117,7 @@ struct GuessRow: View, Identifiable {
     var colors: [Color]
     var id: Int
     @ObservedObject var viewModel : MasterMindViewModel
+
 
     
     
@@ -189,10 +152,6 @@ struct GuessRow: View, Identifiable {
 
 
 
-
-
-
-
 struct PaletteArea: View {
     @State private var offset: CGSize = .zero
     
@@ -216,19 +175,6 @@ struct PaletteArea: View {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -292,6 +238,7 @@ struct GameCircle: View, Identifiable {
     }
 
 }
+
 
 
 //Used to convert integers to colors
