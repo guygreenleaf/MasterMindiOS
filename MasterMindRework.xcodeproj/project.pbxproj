@@ -7,19 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E14ABB325F6A49A00A79DCE /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E14ABB225F6A49A00A79DCE /* Singleton.swift */; };
 		9E3E9EC125F608D300B1AC86 /* MasterMindReworkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9EC025F608D300B1AC86 /* MasterMindReworkApp.swift */; };
 		9E3E9EC325F608D300B1AC86 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9EC225F608D300B1AC86 /* ContentView.swift */; };
 		9E3E9EC525F608D400B1AC86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3E9EC425F608D400B1AC86 /* Assets.xcassets */; };
 		9E3E9EC825F608D400B1AC86 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3E9EC725F608D400B1AC86 /* Preview Assets.xcassets */; };
+		9E3E9ED125F609EF00B1AC86 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9ED025F609EF00B1AC86 /* Model.swift */; };
+		9E3E9ED425F609FC00B1AC86 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9ED325F609FC00B1AC86 /* ViewModel.swift */; };
+		9E3E9ED725F60A1100B1AC86 /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9ED625F60A1100B1AC86 /* GlobalViewModel.swift */; };
+		9E3E9EDA25F60A4B00B1AC86 /* PaletteArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9ED925F60A4B00B1AC86 /* PaletteArea.swift */; };
+		9E3E9EDD25F60A5500B1AC86 /* GameCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9EDC25F60A5500B1AC86 /* GameCircle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E14ABB225F6A49A00A79DCE /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		9E3E9EBD25F608D300B1AC86 /* MasterMindRework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterMindRework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E3E9EC025F608D300B1AC86 /* MasterMindReworkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterMindReworkApp.swift; sourceTree = "<group>"; };
 		9E3E9EC225F608D300B1AC86 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9E3E9EC425F608D400B1AC86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E3E9EC725F608D400B1AC86 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9E3E9EC925F608D400B1AC86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E3E9ED025F609EF00B1AC86 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		9E3E9ED325F609FC00B1AC86 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		9E3E9ED625F60A1100B1AC86 /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
+		9E3E9ED925F60A4B00B1AC86 /* PaletteArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteArea.swift; path = ../../../../../Downloads/MastermindStarter/MastermindStarter/Views/PaletteArea.swift; sourceTree = "<group>"; };
+		9E3E9EDC25F60A5500B1AC86 /* GameCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameCircle.swift; path = ../../../../../Downloads/MastermindStarter/MastermindStarter/Views/GameCircle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +64,17 @@
 		9E3E9EBF25F608D300B1AC86 /* MasterMindRework */ = {
 			isa = PBXGroup;
 			children = (
+				9E3E9ED925F60A4B00B1AC86 /* PaletteArea.swift */,
+				9E3E9EDC25F60A5500B1AC86 /* GameCircle.swift */,
 				9E3E9EC025F608D300B1AC86 /* MasterMindReworkApp.swift */,
 				9E3E9EC225F608D300B1AC86 /* ContentView.swift */,
 				9E3E9EC425F608D400B1AC86 /* Assets.xcassets */,
 				9E3E9EC925F608D400B1AC86 /* Info.plist */,
 				9E3E9EC625F608D400B1AC86 /* Preview Content */,
+				9E3E9ED025F609EF00B1AC86 /* Model.swift */,
+				9E3E9ED325F609FC00B1AC86 /* ViewModel.swift */,
+				9E3E9ED625F60A1100B1AC86 /* GlobalViewModel.swift */,
+				9E14ABB225F6A49A00A79DCE /* Singleton.swift */,
 			);
 			path = MasterMindRework;
 			sourceTree = "<group>";
@@ -138,7 +156,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E3E9EDA25F60A4B00B1AC86 /* PaletteArea.swift in Sources */,
+				9E3E9ED725F60A1100B1AC86 /* GlobalViewModel.swift in Sources */,
+				9E3E9ED125F609EF00B1AC86 /* Model.swift in Sources */,
 				9E3E9EC325F608D300B1AC86 /* ContentView.swift in Sources */,
+				9E3E9EDD25F60A5500B1AC86 /* GameCircle.swift in Sources */,
+				9E14ABB325F6A49A00A79DCE /* Singleton.swift in Sources */,
+				9E3E9ED425F609FC00B1AC86 /* ViewModel.swift in Sources */,
 				9E3E9EC125F608D300B1AC86 /* MasterMindReworkApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
