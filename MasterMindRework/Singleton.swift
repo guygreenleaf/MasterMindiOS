@@ -7,8 +7,11 @@
 
 import Foundation
 class SingletonVM: ObservableObject{
+    
     static let sharedInstance = SingletonVM()
+    
     init(){}
     
      var globalViewModel = MasterMindViewModel()
 }
+

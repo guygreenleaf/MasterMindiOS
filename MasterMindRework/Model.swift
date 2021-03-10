@@ -8,6 +8,9 @@
 import Foundation
 
 struct MasterMindModel{
+  
+
+    
     var guessRows = [GuessRow]()
     //Represent color as int
     var currentlySelectedColor = 0

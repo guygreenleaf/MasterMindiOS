@@ -9,7 +9,12 @@ import SwiftUI
 
 //var viewModel = MasterMindViewModel()
 
+
+
+
 struct ContentView: View {
+    
+  var viewMode = SingletonVM.sharedInstance.globalViewModel
     
 
     var body: some View {
@@ -18,8 +23,6 @@ struct ContentView: View {
         }
             .padding()
     }
-    
-    var viewMode = SingletonVM.sharedInstance.globalViewModel
     
     
     func startGame(diameter: CGFloat) {
@@ -51,6 +54,7 @@ struct ContentView: View {
                     GuessRow(circleDiameter: largeCircleDiameter, colors: whiteCellArray, id: viewModel.getCurrCircleArrayNumber(), viewModel: viewModel)
                         .frame(width: guessAreaWidth, height: 50, alignment: .bottom)
                     
+                    
                     Text("Submit Guess")
                         
                         .fontWeight(.bold)
@@ -60,6 +64,7 @@ struct ContentView: View {
                         .cornerRadius(10)
                         .frame(alignment:.bottom)
                         .onTapGesture {
+                            viewModel.userGuessed(indx: viewModel.getCurrCircleArrayNumber())
                             if(viewModel.tooManyRows() == 11){
                                 print("LOSER!")
                             }
@@ -85,7 +90,7 @@ struct ContentView: View {
                             print(viewModel.getCircleArray())
                             print(viewModel.getGameBoard())
                         }
-                        .padding(.trailing, 35)
+                        .padding(.trailing, 40)
 //                    Rectangle() // rectangles can serve as spacers.
 //                        .frame(width: guessAreaWidth, height: largeCircleDiameter, alignment: .bottom)
 //                        .opacity(0.0)
@@ -116,6 +121,7 @@ struct GuessRow: View, Identifiable {
     let circleDiameter: CGFloat
     var colors: [Color]
     var id: Int
+    var hasBeenGuessed = false
     @ObservedObject var viewModel : MasterMindViewModel
 
     
@@ -131,13 +137,12 @@ struct GuessRow: View, Identifiable {
 //                            viewModel.getCircleArray()[viewModel.getCurrCircleArrayNumber()][idx].color = viewModel.getSelectedColor()
 //
                             viewModel.setCircleArrayColor( indx: idx)
-                            print("HERE COMES JONNY!")
+                            print("--------------------------")
                             print(viewModel.getCircleArray()[viewModel.getCurrCircleArrayNumber()][idx])
                         }
                 }
             
-            
-            FeedbackArea(length: circleDiameter)
+            FeedbackArea(length: circleDiameter, viewModel: viewModel, id: ripl)
         }
     }
     }
@@ -184,35 +189,83 @@ struct PaletteArea: View {
 
 
 
-struct FeedbackArea: View {
+struct FeedbackArea: View, Identifiable {
     let length: CGFloat
-    
+    @ObservedObject var viewModel: MasterMindViewModel
+    let id : Int
     var diameter: CGFloat {
         length / CGFloat(5.0)
     }
     
-    
+    var big = 12
     var body: some View {
+        if(viewModel.getGameBoard()[id].hasBeenGuessed){
         VStack(alignment: .leading) {
             HStack {
+                
+                //NEED 3 POSSIBLE CIRCLES, BLANK, RED, OR GREEN
+                //NEED IF CHECK TO CHECK THESE [IMPLEMENT IN VIEWMODEL TO RETURN INT TO TURN INTO COLOR WITH CONV]:
+                //  FUNC someFunc() -> Int {
+                //    #Create var colorOfFeedback:Int = 0
+                //  IS COLOR EVEN IN THE ARRAY?
+                //     NO -> RETURN BLANK(0)
+                //     YES -> GO STEP 2
+                // IS COLOR AT PROPER INDEX?
+                //     NO -> RETURN RED(4)
+                //     YES -> RETURN GREEN(5)
+                // }
+                if(viewModel.checkFeedBackCircles() == 0){
                 Circle()
                     .stroke(lineWidth: 1.0)
                     .frame(width: diameter, height: diameter, alignment: .leading)
                 Circle()
                     .stroke(lineWidth: 1.0)
                     .frame(width: diameter, height: diameter, alignment: .trailing)
+                }
+                else if(viewModel.checkFeedBackCircles() == 3){
+                    Circle()
+                        
+                        .fill(Color.red)
+                        .frame(width: diameter, height: diameter, alignment: .leading)
+                        
+                        
+                    
+                    Circle()
+                        
+                        .fill(Color.red)
+                        .frame(width: diameter, height: diameter, alignment: .trailing)
+                }
             }
             HStack {
                 Circle()
                     .stroke(lineWidth: 1.0)
                     .frame(width: diameter, height: diameter, alignment: .leading)
+                    
                 Circle()
                     .stroke(lineWidth: 1.0)
                     .frame(width: diameter, height: diameter, alignment: .trailing)
 
             }
         }
+        }
+        else{
+        HStack{
+        Circle()
+            
+            .fill(Color.white)
+            .frame(width: diameter, height: diameter, alignment: .leading)
+            
+            
+        
+        Circle()
+            
+            .fill(Color.white)
+            .frame(width: diameter, height: diameter, alignment: .trailing)
+        }
+        }
     }
+    
+    
 }
 
 
