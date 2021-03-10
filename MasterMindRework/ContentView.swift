@@ -35,7 +35,7 @@ struct ContentView: View {
         let paletteAreaWidth = geometry.size.width * 0.20            // 20% goes to palette
         let guessAreaWidth = geometry.size.width - paletteAreaWidth
         let numberOfGuessCircles = 4
-        
+        let whiteCellArray:Array<Color> = [.white, .white, .white, .white]
         let largeCircleDiameter = guessAreaWidth / CGFloat(numberOfGuessCircles + 2) // one for the feedback and one for spaces in between
         
         startGame(diameter: largeCircleDiameter)
@@ -48,7 +48,7 @@ struct ContentView: View {
                 VStack {
          
 
-                    GuessRow(circleDiameter: largeCircleDiameter, colors: [.white, .white, .white, .white], id: viewModel.getCurrCircleArrayNumber(), viewModel: viewModel)
+                    GuessRow(circleDiameter: largeCircleDiameter, colors: whiteCellArray, id: viewModel.getCurrCircleArrayNumber(), viewModel: viewModel)
                         .frame(width: guessAreaWidth, height: 50, alignment: .bottom)
                     
                     Text("Submit Guess")
@@ -85,7 +85,7 @@ struct ContentView: View {
                             print(viewModel.getCircleArray())
                             print(viewModel.getGameBoard())
                         }
-    
+                        .padding(.trailing, 35)
 //                    Rectangle() // rectangles can serve as spacers.
 //                        .frame(width: guessAreaWidth, height: largeCircleDiameter, alignment: .bottom)
 //                        .opacity(0.0)
@@ -118,12 +118,9 @@ struct GuessRow: View, Identifiable {
     var id: Int
     @ObservedObject var viewModel : MasterMindViewModel
 
-
-    
-    
     
     var body: some View {
-        ForEach(0..<viewModel.getGameBoard().count, id: \.self){ ripl in
+        ForEach((0..<viewModel.getGameBoard().count).reversed(), id: \.self){ ripl in
         HStack(spacing: 20.0) {
             
                 ForEach( 0..<colors.count, id: \.self ) { idx in
@@ -162,6 +159,8 @@ struct PaletteArea: View {
     var body: some View {
                 
         return VStack(alignment: .leading, spacing: 10) {
+            GameCircle(diameter: circleDiameter, color: convIntToColor(conv: viewModel.getSelectedColor()) , id: 9999)
+                .padding(.bottom, 160)
             ForEach( 0..<colors.count ) { colorIdx in
                 GameCircle(diameter: circleDiameter, color: colors[colorIdx], id: colorIdx)
                     .onTapGesture {
@@ -169,7 +168,11 @@ struct PaletteArea: View {
                         print(viewModel.getSelectedColor())
                     }
             }
-            //Show color selected
+
+            Rectangle()
+                        .frame(width: 1, height: 250, alignment: .bottom)
+                        .opacity(0.0)
+                        .padding()            //Show color selected
 //            GameCircle(diameter: circleDiameter, color: colors[viewModel.getSelectedColor()], id: 9999)
 //                .padding(.top, 275)
         }
