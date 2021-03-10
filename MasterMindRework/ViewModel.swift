@@ -124,15 +124,18 @@ class MasterMindViewModel: ObservableObject {
     func checkFeedBackCircles() -> Int {
         
          var colorOfFeedback:Int = 0
-        let currArr:Array<Int> = [masterMindModel.circleArray[masterMindModel.currCircleArray][0].color, masterMindModel.circleArray[masterMindModel.currCircleArray][1].color, masterMindModel.circleArray[masterMindModel.currCircleArray][2].color, masterMindModel.circleArray[masterMindModel.currCircleArray][3].color]
+        for nums in 0...masterMindModel.guessRows.count-1 {
+            let currArr:Array<Int> = [masterMindModel.circleArray[nums][0].color, masterMindModel.circleArray[nums][1].color, masterMindModel.circleArray[nums][2].color, masterMindModel.circleArray[nums][3].color]
 
-        for i in 0...3{
-            for j in 0...3{
-                if(currArr[i] == masterMindModel.solution[j]){
-                    colorOfFeedback = 2
+            for i in 0...3{
+                for j in 0...3{
+                    if(currArr[i] == masterMindModel.solution[j]){
+                        colorOfFeedback = 2
+                    }
                 }
             }
         }
+        
         return colorOfFeedback
 //      IS COLOR EVEN IN THE ARRAY?
 //         NO -> RETURN BLANK(0)
@@ -141,4 +144,24 @@ class MasterMindViewModel: ObservableObject {
 //         NO -> RETURN RED(4)
 //         YES -> RETURN GREEN(5)
      }
+    
+    var vel:Int = 0
+    func increaseAndReturnVel()->Int{
+        if(vel == 4){
+            vel = 0
+        }
+        
+        var retValue:Int = vel
+        
+        vel += 1
+        
+        return retValue
+        
+        
+        
+    }
+    
+    func getSolution()->Array<Int>{
+        return masterMindModel.solution
+    }
 }

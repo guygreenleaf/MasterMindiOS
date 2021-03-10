@@ -43,7 +43,7 @@ struct MasterMindModel{
     }
     
     
-    var solution = [2, 2, 2, 2]
+    var solution = [2, 3, 1, 2]
 }
 
 

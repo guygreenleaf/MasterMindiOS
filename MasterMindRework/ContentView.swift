@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-//var viewModel = MasterMindViewModel()
-
-
 
 
 struct ContentView: View {
@@ -126,8 +123,20 @@ struct GuessRow: View, Identifiable {
     var colors: [Color]
     var id: Int
     var hasBeenGuessed = false
-    
     @ObservedObject var viewModel : MasterMindViewModel
+
+    static var vel:Int = 0
+    
+    static func increaseAndReturnVel()->Int{
+        var retValue:Int = vel
+        
+        vel += 1
+        
+        return retValue
+        
+        
+        
+    }
     
     var body: some View {
         ForEach((0..<viewModel.getGameBoard().count).reversed(), id: \.self){ ripl in
@@ -144,9 +153,10 @@ struct GuessRow: View, Identifiable {
                             print("--------------------------")
                             print(viewModel.getCircleArray()[viewModel.getCurrCircleArrayNumber()][idx])
                         }
+                    
+         
                 }
-            
-            FeedbackArea(length: circleDiameter, viewModel: viewModel, id: ripl)
+            FeedbackArea(length: circleDiameter, viewModel: viewModel, id: ripl, currSpot: 0)
         }
     }
     }
@@ -165,6 +175,7 @@ struct PaletteArea: View {
     let colors: [Color]
     let circleDiameter: CGFloat
     @ObservedObject var viewModel: MasterMindViewModel
+
     var body: some View {
                 
         return VStack(alignment: .leading, spacing: 10) {
@@ -207,31 +218,101 @@ struct FeedbackArea: View, Identifiable {
     let length: CGFloat
     @ObservedObject var viewModel: MasterMindViewModel
     let id : Int
-    var possibleColors:Array<Color> = [.white, .red, .blue]
+    var possibleColors:Array<Color> = [.white, .red, .blue, .white]
     var diameter: CGFloat {
         length / CGFloat(5.0)
     }
+    let currSpot: Int
     
     var big = 12
     var body: some View {
         if(viewModel.getGameBoard()[id].hasBeenGuessed){
         VStack(alignment: .leading) {
             HStack {
+                //Change what circle is filled with
+                if(viewModel.getCircleArray()[id][0].color == viewModel.getSolution()[0]){
                 Circle()
-                    .fill(convIntToColor(conv: viewModel.checkFeedBackCircles()))
+                    .fill(Color.green)
                 .frame(width: diameter, height: diameter)
-                Circle()
-                .fill(Color.white)
-                .frame(width: diameter, height: diameter)
+                }
+                else if(viewModel.getSolution().contains(viewModel.getCircleArray()[id][0].color)){
                 
+                Circle()
+                    .fill(Color.red)
+                .frame(width: diameter, height: diameter)
+                }
+                
+                else{
+                    Circle()
+                        .fill(Color.white)
+                     
+                        .frame(width: diameter, height: diameter)
+                }
+                
+                
+                
+                if(viewModel.getCircleArray()[id][1].color == viewModel.getSolution()[1]){
+                Circle()
+                    .fill(Color.green)
+                .frame(width: diameter, height: diameter)
+                }
+                else if(viewModel.getSolution().contains(viewModel.getCircleArray()[id][1].color)){
+                
+                Circle()
+                    .fill(Color.red)
+                .frame(width: diameter, height: diameter)
+                }
+                
+                else{
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: diameter, height: diameter)
+                }
                 }
             HStack {
+                
+                
+                if(viewModel.getCircleArray()[id][2].color == viewModel.getSolution()[2]){
                 Circle()
-                .fill(Color.white)
+                    .fill(Color.green)
                 .frame(width: diameter, height: diameter)
+                }
+                else if(viewModel.getSolution().contains(viewModel.getCircleArray()[id][2].color)){
+                
                 Circle()
-                .fill(Color.white)
+                    .fill(Color.red)
                 .frame(width: diameter, height: diameter)
+                }
+                
+                else{
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: diameter, height: diameter)
+                }
+                
+                
+                
+                if(viewModel.getCircleArray()[id][3].color == viewModel.getSolution()[3]){
+                Circle()
+                    .fill(Color.green)
+                .frame(width: diameter, height: diameter)
+                }
+                else if(viewModel.getSolution().contains(viewModel.getCircleArray()[id][3].color)){
+                
+                Circle()
+                    .fill(Color.red)
+                .frame(width: diameter, height: diameter)
+                }
+                
+                else{
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: diameter, height: diameter)
+                }
+                
+                
+                
+
                 
                 }
             }
