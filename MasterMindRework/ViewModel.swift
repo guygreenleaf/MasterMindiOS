@@ -129,7 +129,7 @@ class MasterMindViewModel: ObservableObject {
         for i in 0...3{
             for j in 0...3{
                 if(currArr[i] == masterMindModel.solution[j]){
-                    colorOfFeedback = 3
+                    colorOfFeedback = 2
                 }
             }
         }

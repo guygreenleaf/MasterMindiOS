@@ -126,8 +126,8 @@ struct GuessRow: View, Identifiable {
     var colors: [Color]
     var id: Int
     var hasBeenGuessed = false
+    
     @ObservedObject var viewModel : MasterMindViewModel
-
     
     var body: some View {
         ForEach((0..<viewModel.getGameBoard().count).reversed(), id: \.self){ ripl in
@@ -207,6 +207,7 @@ struct FeedbackArea: View, Identifiable {
     let length: CGFloat
     @ObservedObject var viewModel: MasterMindViewModel
     let id : Int
+    var possibleColors:Array<Color> = [.white, .red, .blue]
     var diameter: CGFloat {
         length / CGFloat(5.0)
     }
@@ -217,7 +218,7 @@ struct FeedbackArea: View, Identifiable {
         VStack(alignment: .leading) {
             HStack {
                 Circle()
-                .fill(Color.white)
+                    .fill(convIntToColor(conv: viewModel.checkFeedBackCircles()))
                 .frame(width: diameter, height: diameter)
                 Circle()
                 .fill(Color.white)
