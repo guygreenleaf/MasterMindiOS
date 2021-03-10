@@ -21,7 +21,11 @@ struct ContentView: View {
         GeometryReader{ geometry in
             body(geometry, viewModel: viewMode)
         }
-            .padding()
+        .padding()
+        .background(Image("bigMountain"))
+        .ignoresSafeArea()
+            
+   
     }
     
     
@@ -127,7 +131,7 @@ struct GuessRow: View, Identifiable {
     
     var body: some View {
         ForEach((0..<viewModel.getGameBoard().count).reversed(), id: \.self){ ripl in
-        HStack(spacing: 20.0) {
+        HStack(spacing: 10.0) {
             
                 ForEach( 0..<colors.count, id: \.self ) { idx in
                     GameCircle(diameter: circleDiameter, color:
@@ -165,7 +169,7 @@ struct PaletteArea: View {
                 
         return VStack(alignment: .leading, spacing: 10) {
             GameCircle(diameter: circleDiameter, color: convIntToColor(conv: viewModel.getSelectedColor()) , id: 9999)
-                .padding(.bottom, 160)
+                .padding(.bottom, 120)
             ForEach( 0..<colors.count ) { colorIdx in
                 GameCircle(diameter: circleDiameter, color: colors[colorIdx], id: colorIdx)
                     .onTapGesture {
@@ -187,7 +191,17 @@ struct PaletteArea: View {
 
 
 
-
+//NEED 3 POSSIBLE CIRCLES, BLANK, RED, OR GREEN
+//NEED IF CHECK TO CHECK THESE [IMPLEMENT IN VIEWMODEL TO RETURN INT TO TURN INTO COLOR WITH CONV]:
+//  FUNC someFunc() -> Int {
+//    #Create var colorOfFeedback:Int = 0
+//  IS COLOR EVEN IN THE ARRAY?
+//     NO -> RETURN BLANK(0)
+//     YES -> GO STEP 2
+// IS COLOR AT PROPER INDEX?
+//     NO -> RETURN RED(4)
+//     YES -> RETURN GREEN(5)
+// }
 
 struct FeedbackArea: View, Identifiable {
     let length: CGFloat
@@ -202,70 +216,49 @@ struct FeedbackArea: View, Identifiable {
         if(viewModel.getGameBoard()[id].hasBeenGuessed){
         VStack(alignment: .leading) {
             HStack {
+                Circle()
+                .fill(Color.white)
+                .frame(width: diameter, height: diameter)
+                Circle()
+                .fill(Color.white)
+                .frame(width: diameter, height: diameter)
                 
-                //NEED 3 POSSIBLE CIRCLES, BLANK, RED, OR GREEN
-                //NEED IF CHECK TO CHECK THESE [IMPLEMENT IN VIEWMODEL TO RETURN INT TO TURN INTO COLOR WITH CONV]:
-                //  FUNC someFunc() -> Int {
-                //    #Create var colorOfFeedback:Int = 0
-                //  IS COLOR EVEN IN THE ARRAY?
-                //     NO -> RETURN BLANK(0)
-                //     YES -> GO STEP 2
-                // IS COLOR AT PROPER INDEX?
-                //     NO -> RETURN RED(4)
-                //     YES -> RETURN GREEN(5)
-                // }
-                if(viewModel.checkFeedBackCircles() == 0){
-                Circle()
-                    .stroke(lineWidth: 1.0)
-                    .frame(width: diameter, height: diameter, alignment: .leading)
-                Circle()
-                    .stroke(lineWidth: 1.0)
-                    .frame(width: diameter, height: diameter, alignment: .trailing)
                 }
-                else if(viewModel.checkFeedBackCircles() == 3){
-                    Circle()
-                        
-                        .fill(Color.red)
-                        .frame(width: diameter, height: diameter, alignment: .leading)
-                        
-                        
-                    
-                    Circle()
-                        
-                        .fill(Color.red)
-                        .frame(width: diameter, height: diameter, alignment: .trailing)
-                }
-            }
             HStack {
                 Circle()
-                    .stroke(lineWidth: 1.0)
-                    .frame(width: diameter, height: diameter, alignment: .leading)
-                    
+                .fill(Color.white)
+                .frame(width: diameter, height: diameter)
                 Circle()
-                    .stroke(lineWidth: 1.0)
-                    .frame(width: diameter, height: diameter, alignment: .trailing)
-
+                .fill(Color.white)
+                .frame(width: diameter, height: diameter)
+                
+                }
             }
         }
-        }
-        else{
-        HStack{
-        Circle()
+        else{  VStack(alignment: .leading){
             
-            .fill(Color.white)
-            .frame(width: diameter, height: diameter, alignment: .leading)
-            
-            
-        
-        Circle()
-            
-            .fill(Color.white)
-            .frame(width: diameter, height: diameter, alignment: .trailing)
+            HStack {
+                Circle()
+                .opacity(0)
+          
+                .frame(width: diameter, height: diameter)
+                Circle()
+                .opacity(0)
+                .frame(width: diameter, height: diameter)
+                
+                }
+            HStack {
+                Circle()
+                .opacity(0)
+                .frame(width: diameter, height: diameter)
+                Circle()
+                .opacity(0)
+                .frame(width: diameter, height: diameter)
+                
+                }
         }
         }
     }
-    
-    
 }
 
 
