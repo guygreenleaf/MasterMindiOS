@@ -17,6 +17,8 @@
 		9E3E9ED725F60A1100B1AC86 /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9ED625F60A1100B1AC86 /* GlobalViewModel.swift */; };
 		9E3E9EDA25F60A4B00B1AC86 /* PaletteArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9ED925F60A4B00B1AC86 /* PaletteArea.swift */; };
 		9E3E9EDD25F60A5500B1AC86 /* GameCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9EDC25F60A5500B1AC86 /* GameCircle.swift */; };
+		9E3EC53F25FB0A1500B38B82 /* WinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EC53E25FB0A1500B38B82 /* WinView.swift */; };
+		9E3EC54225FB20E600B38B82 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EC54125FB20E600B38B82 /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		9E3E9ED625F60A1100B1AC86 /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
 		9E3E9ED925F60A4B00B1AC86 /* PaletteArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteArea.swift; path = ../../../../../Downloads/MastermindStarter/MastermindStarter/Views/PaletteArea.swift; sourceTree = "<group>"; };
 		9E3E9EDC25F60A5500B1AC86 /* GameCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameCircle.swift; path = ../../../../../Downloads/MastermindStarter/MastermindStarter/Views/GameCircle.swift; sourceTree = "<group>"; };
+		9E3EC53E25FB0A1500B38B82 /* WinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinView.swift; sourceTree = "<group>"; };
+		9E3EC54125FB20E600B38B82 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				9E3E9ED325F609FC00B1AC86 /* ViewModel.swift */,
 				9E3E9ED625F60A1100B1AC86 /* GlobalViewModel.swift */,
 				9E14ABB225F6A49A00A79DCE /* Singleton.swift */,
+				9E3EC53E25FB0A1500B38B82 /* WinView.swift */,
+				9E3EC54125FB20E600B38B82 /* MenuView.swift */,
 			);
 			path = MasterMindRework;
 			sourceTree = "<group>";
@@ -161,7 +167,9 @@
 				9E3E9ED125F609EF00B1AC86 /* Model.swift in Sources */,
 				9E3E9EC325F608D300B1AC86 /* ContentView.swift in Sources */,
 				9E3E9EDD25F60A5500B1AC86 /* GameCircle.swift in Sources */,
+				9E3EC54225FB20E600B38B82 /* MenuView.swift in Sources */,
 				9E14ABB325F6A49A00A79DCE /* Singleton.swift in Sources */,
+				9E3EC53F25FB0A1500B38B82 /* WinView.swift in Sources */,
 				9E3E9ED425F609FC00B1AC86 /* ViewModel.swift in Sources */,
 				9E3E9EC125F608D300B1AC86 /* MasterMindReworkApp.swift in Sources */,
 			);

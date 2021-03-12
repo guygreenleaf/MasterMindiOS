@@ -8,10 +8,14 @@
 import Foundation
 class SingletonVM: ObservableObject{
     
-    static let sharedInstance = SingletonVM()
+    static var sharedInstance = SingletonVM()
     
     init(){}
     
-     var globalViewModel = MasterMindViewModel()
+    @Published var globalViewModel = MasterMindViewModel()
+    
+    static var shareReset:SingletonVM {
+       return self.sharedInstance 
+    }
 }
 

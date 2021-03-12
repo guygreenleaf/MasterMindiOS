@@ -9,8 +9,12 @@ import Foundation
 
 struct MasterMindModel{
   
+    var gameStarted = false 
 
+    var buttonCheck = true
     
+    var isSolShowing = false
+
     var guessRows = [GuessRow]()
     //Represent color as int
     var currentlySelectedColor = 0
@@ -29,9 +33,12 @@ struct MasterMindModel{
     var individCircID = 0
     var howManyCircles = 0
     
+    var guessesLeft = 10
     
+    var userWon = false
     
     var userDidGuess = false
+    
     init(){
         //Initialize a row of circles that are Blank.  The color:0 means its a white circle. Give each one a unique id.
         let startCircles = [Circles(color: 0, id: circleID+1), Circles(color:0, id: circleID+2), Circles(color:0, id: circleID+3), Circles(color:0, id: circleID+4) ]
@@ -43,7 +50,7 @@ struct MasterMindModel{
     }
     
     
-    var solution = [2, 3, 1, 2]
+    var solution = [Int.random(in: 1...5),Int.random(in: 1...5),Int.random(in: 1...5),Int.random(in: 1...5) ]
 }
 
 

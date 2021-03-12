@@ -9,6 +9,34 @@ import Foundation
 class MasterMindViewModel: ObservableObject {
     @Published var masterMindModel = MasterMindModel()
     
+    
+    func resetGame(){
+        masterMindModel.circleArray.removeAll()
+        masterMindModel.guessRows.removeAll()
+        
+        masterMindModel.isSolShowing = false
+        masterMindModel.currCircleArray = 0
+        masterMindModel.guessRowID = 0
+        
+        masterMindModel.selectedColor = 0
+        masterMindModel.individCircID = 0
+        masterMindModel.howManyCircles = 0
+        masterMindModel.guessesLeft = 10
+        
+        masterMindModel.userWon = false
+        masterMindModel.userDidGuess = false
+        masterMindModel.buttonCheck = true
+        
+      
+        let startCircles = [Circles(color: 0, id: masterMindModel.circleID+1), Circles(color:0, id: masterMindModel.circleID+2), Circles(color:0, id: masterMindModel.circleID+3), Circles(color:0, id: masterMindModel.circleID+4) ]
+        //Append the row of circles to the Circle Array
+        masterMindModel.circleArray.append(startCircles)
+        masterMindModel.howManyCircles += 4
+        
+        
+        masterMindModel.solution = [Int.random(in: 1...5),Int.random(in: 1...5),Int.random(in: 1...5),Int.random(in: 1...5) ]
+        
+    }
     func getGameBoard()->Array<GuessRow>{
         return masterMindModel.guessRows
     }
@@ -94,13 +122,15 @@ class MasterMindViewModel: ObservableObject {
     func checkForWin()->Bool{
         if(masterMindModel.circleArray[masterMindModel.currCircleArray][0].color == masterMindModel.solution[0] && masterMindModel.circleArray[masterMindModel.currCircleArray][1].color == masterMindModel.solution[1]) && masterMindModel.circleArray[masterMindModel.currCircleArray][2].color == masterMindModel.solution[2] &&
             masterMindModel.circleArray[masterMindModel.currCircleArray][3].color == masterMindModel.solution[3]{
+            
             return true
         }
+       
         return false
     }
     
-    func createNewGuessRow(){
-        
+    func returnWin()->Bool{
+        return masterMindModel.userWon
     }
     
     func circlesPlus(){
@@ -121,29 +151,7 @@ class MasterMindViewModel: ObservableObject {
         masterMindModel.guessRows[indx].hasBeenGuessed = true
     }
     
-    func checkFeedBackCircles() -> Int {
-        
-         var colorOfFeedback:Int = 0
-        for nums in 0...masterMindModel.guessRows.count-1 {
-            let currArr:Array<Int> = [masterMindModel.circleArray[nums][0].color, masterMindModel.circleArray[nums][1].color, masterMindModel.circleArray[nums][2].color, masterMindModel.circleArray[nums][3].color]
 
-            for i in 0...3{
-                for j in 0...3{
-                    if(currArr[i] == masterMindModel.solution[j]){
-                        colorOfFeedback = 2
-                    }
-                }
-            }
-        }
-        
-        return colorOfFeedback
-//      IS COLOR EVEN IN THE ARRAY?
-//         NO -> RETURN BLANK(0)
-//         YES -> GO STEP 2
-//     IS COLOR AT PROPER INDEX?
-//         NO -> RETURN RED(4)
-//         YES -> RETURN GREEN(5)
-     }
     
     var vel:Int = 0
     func increaseAndReturnVel()->Int{
@@ -163,5 +171,55 @@ class MasterMindViewModel: ObservableObject {
     
     func getSolution()->Array<Int>{
         return masterMindModel.solution
+    }
+    
+    func showSolution(){
+        let currShowing = masterMindModel.isSolShowing
+        masterMindModel.isSolShowing = !currShowing
+    }
+    func isSolutionShowing() -> Bool{
+        return masterMindModel.isSolShowing
+    }
+    func userGuess(){
+        masterMindModel.userDidGuess = true
+    }
+    func userSubmitted()->Bool{
+        return masterMindModel.userDidGuess
+    }
+    
+    func eraseGameBoard(){
+        masterMindModel.guessRows.removeAll()
+        masterMindModel.circleArray.removeAll()
+    }
+    
+    
+    func removeLastGameBoardRow(){
+        masterMindModel.guessRows.removeLast()
+    }
+    
+    func removeLastCircle(){
+        masterMindModel.circleArray.removeLast()
+    }
+    
+    func forButtonCheck(){
+        masterMindModel.buttonCheck = false
+    }
+    
+    func getButtonCheck()->Bool{
+        return masterMindModel.buttonCheck
+    }
+    
+    func getGameStarted()->Bool{
+        return masterMindModel.gameStarted
+        
+    }
+    
+    func setGameStarted(){
+        masterMindModel.gameStarted = true
+        
+    }
+    
+    func setGameNotStarted(){
+        masterMindModel.gameStarted = false
     }
 }
